@@ -1,0 +1,108 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='/stylesheets/style_crawling.css') 
+  div#crawling
+    div(ng-app="housingApp",ng-controller="retrievingCtrl")
+      h1= title
+      br
+      div.form-group
+        lable Pass Code
+        br
+        br
+        input.form-control(type='text', placeholder='e.g., 9dx^8yPQ' value='' ng-model='passcode')
+        button.btn.btn-primary(ng-click='submitPass()') Submit Passcode
+        br        
+        br
+      br
+      div(ng-if='crawlingButton')
+        div.form-group
+          lable Email receivers(max: 4)
+          br
+          br
+          input.form-control.input-email(type='text', placeholder='e.g., donk@ddbox.com' value='xemeusch@gmail.com')
+          br
+          input.form-control.input-email(type='text', placeholder='e.g., elon@ddbox.com')
+          br
+          input.form-control.input-email(type='text', placeholder='e.g., fast@ddbox.com')
+          br
+          input.form-control.input-email(type='text', placeholder='e.g., game@ddbox.com')
+        button.btn.btn-primary(ng-click='updateOptions()') Update Options
+        span &emsp; 
+        img(ng-if="updatingOptions" src="loading-animal.gif")
+        span(ng-if="updatingOptions") Retrieving options...
+        span {{errorOption}}
+        br
+        br
+        div.form-group
+          lable Location
+          br
+          select.form-control.input-select(ng-model='select.one') {{select.one}}
+            option(ng-repeat='item in optionData["#RegioDropDown"]' value='{{item.selIndex}}') {{item.selText}}
+        
+        div.form-group
+          lable Name of University
+          br
+          select.form-control.input-select(ng-model='select.two') {{select.two}}
+            option(ng-repeat='item in optionData["#ContingenthouderDropDown"]' value='{{item.selIndex}}') {{item.selText}}
+        
+        div.form-group
+          lable Program Type
+          br
+          select.form-control.input-select(ng-model='select.three') {{select.three}}
+            option(ng-repeat='item in optionData["#ContingentDoelgroepDropDown"]' value='{{item.selIndex}}') {{item.selText}}
+        
+        div.form-group
+          lable Time of Rent
+          br
+          select.form-control.input-select(ng-model='select.four') {{select.four}}
+            option(ng-repeat='item in optionData["#ContingentPeriodeDropDown"]' value='{{item.selIndex}}') {{item.selText}}
+        br
+        br
+        lable Selected Index receivers(max: 4)
+        br
+        input.select-index(type='number', placeholder='e.g., 1', value='{{select.one == null? 2 : select.one}}')
+        input.select-index(type='number', placeholder='e.g., 1', value='{{select.two == null? 2 : select.two}}')
+        input.select-index(type='number', placeholder='e.g., 2', value='{{select.three == null? 8 : select.three}}')
+        input.select-index(type='number', placeholder='e.g., 2', value='{{select.four == null? 13 : select.four}}')
+        br
+        lable Set delayed seconds(max: 80)
+        br
+        input#delayed-second(type='number', placeholder='e.g., 1', value='30')
+        br
+        button.btn.btn-primary(ng-click='startCrawling()') Start Crawling
+        span &emsp;
+        button.btn.btn-primary(ng-click='stopCrawling()') Stop Crawling
+        span &emsp; 
+        img(ng-if="crawlingStatus" src="loading-animal.gif")
+        span(ng-if="crawlingStatus") Crawling...
+        br
+        br
+        input.form-control.input-pagelink(type='text', placeholder='e.g., donk@ddbox.com' ng-model='pagelink')
+        br
+        button.btn.btn-primary(ng-click='crawlingAmazon()') Crawling Amazon
+        &emsp;
+        button.btn.btn-primary(ng-click='stopAmazon()') Stop Amazon           
+        br
+        br
+      button.btn.btn-info(ng-click="getJson()") Start watching JSON Data
+      span &emsp;
+      button.btn.btn-info(ng-click="stopJson()") Stop watching JSON Data
+      span &emsp; 
+      img(ng-if="gettingJson" src="loading-animal.gif")
+      br
+      div(ng-repeat="(k, v) in summary")
+        span {{k + ': ' + v}}
+      table.table.table-striped
+        tr
+          th No.
+          th(ng-repeat="(k, v) in mapper") {{k}}
+        tr(ng-repeat="item in result")
+          td {{$index+1}}
+          td(ng-repeat="(k, v) in item")
+            a(href="{{item.link}}" target="_blank")
+              span(ng-if="k != 'link'") {{v}}
+  script.
+    if (true)
+      console.log('Script is working')    
+  script(type="text/javascript" src="javascripts/crawling.js")

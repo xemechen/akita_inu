@@ -1,0 +1,27 @@
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Andrew Chen <AndrewYuYingChen@gmail.com>",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "^4.16.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2",
+    "stylus": "0.54.5",
+    "fs": "^0.0.1-security",
+    "phantom": "2.1.21",
+    "phantomjs": "2.1.7",
+    "request": "^2.81.0",
+    "cheerio": "^0.22.0",
+    "gmail-send": "^1.2.10"
+  }
+}

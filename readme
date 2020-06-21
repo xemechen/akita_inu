@@ -1,0 +1,46 @@
+#### execute the following in terminal/command ####
+
+--
+
+# build Docker image
+docker build -t akitainu/node-web-app .
+
+# check the listed imaged
+docker images
+
+--
+
+# Run the image
+# with -d runs the container in detached mode, leaving the container running in the background. The -p flag redirects a public port to a private port inside the container. 
+docker run --name akitainu-web -p 49160:3000 -d akitainu/node-web-app
+
+# Get container details e.g., ID
+docker ps -a
+
+# Print app output
+docker logs akitainu-web (or <container id>)
+docker ps
+# Example
+# showing Running http://localhost:8080
+
+--
+
+# Enter the container
+docker exec -it <container id> /bin/bash
+docker exec -it akitainu-web /bin/bash
+# (輸入exit離開Container 或 熱鍵ctrl+d)
+
+--
+
+# Call your app using curl (install if needed via: sudo apt-get install curl)
+curl -i localhost:49160
+
+--
+
+# stop docker
+docker stop akitainu-web
+
+# kill the container
+docker rm akitainu-web
+
+

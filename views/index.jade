@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 Crawling -> Akita
+  p Welcome to AkitaInu #{title}
+  div(ng-app="workingApp",ng-controller="indexCtrl")
+    button.btn.btn-info(ng-click='getJob()') Click
+    br        
+    br
+    div#job {{task}}
+    br
+    br
+    input.form-control.input-email(type='number', placeholder='2018' value='2018' ng-model='year')
+    input.form-control.input-email(type='number', placeholder='7' value='7' ng-model='month')
+    input.form-control.input-email(type='number', placeholder='31' value='31' ng-model='day')
+    br
+    input.form-control.input-email(type='number', placeholder='5000' value='5000' ng-model='budget')
+    br
+    button.btn.btn-info(ng-click='calculateBudget()') Calculate
+    br
+    br
+    div(ng-if='calBtn')
+      div#cal_output You can use €{{dailyBudget}} / day
+  script.
+    if (true)
+      console.log('Script is working')    
+  script(type="text/javascript" src="javascripts/index.js")

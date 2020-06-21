@@ -1,0 +1,4 @@
+npm install
+
+set DEBUG=docker_web_app:* & npm start
+set DEBUG=docker_web_app:* & npm start PW[email password] PC[access passcode]
